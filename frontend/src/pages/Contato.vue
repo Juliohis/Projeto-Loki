@@ -7,8 +7,8 @@
       entre em contato pelo e-mail:
     </p>
 
-    <a href="mailto:SEU_EMAIL">
-      SEU_EMAIL
+    <a href="mailto:lokisuportetecnico@gmail.com">
+    lokisuportetecnico@gmail.com
     </a>
   </main>
 </template>

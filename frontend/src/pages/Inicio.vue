@@ -1,3 +1,14 @@
+
+<script setup>
+import { useRouter } from 'vue-router'
+
+const router = useRouter()
+
+function iniciarIdentificacao() {
+  router.push('/identificar')
+}
+</script>
+
 <template>
   <main>
     <h1>Projeto Loki</h1>
@@ -6,7 +17,7 @@
       Descubra qual jogo de Super Nintendo você está procurando.
     </p>
 
-    <button>
+    <button @click="iniciarIdentificacao">
       Começar identificação
     </button>
   </main>
