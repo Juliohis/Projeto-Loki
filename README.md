@@ -1,71 +1,176 @@
-# Aplica-o-Akinator-Snes-Sistema-de-identifica-o-de-Jogos-atrav-s-de-perguntas-e-respostas.
-# Aplicação Akinator SNES
-### Sistema de Identificação de Jogos através de Perguntas e Respostas
+# Projeto Loki 🎮
 
-**Equipe:** Júlio de Almeida Prazeres
+**Sistema web de identificação e consulta de jogos do Super Nintendo (SNES).**
 
-## 1. Objetivo Geral
+O Projeto Loki é uma aplicação desenvolvida para ajudar usuários a identificar jogos clássicos do Super Nintendo Entertainment System por meio da seleção de características visuais e de jogabilidade.
 
-Desenvolver uma aplicação web com o objetivo de ajudar usuários a recordar e identificar jogos da plataforma Super Nintendo Entertainment System (SNES), utilizando um sistema interativo de perguntas e respostas.
+O sistema utiliza filtros e consultas a um banco de dados relacional para encontrar jogos compatíveis com as características selecionadas.
 
-A escolha do SNES como objeto de estudo se deve à sua biblioteca de jogos amplamente documentada, permitindo o levantamento e a organização de informações de maneira estruturada e rastreável.
+**Desenvolvedor:** Júlio de Almeida Prazeres
 
-A identificação dos jogos será realizada por meio de características como:
+## 🌐 Acesso à aplicação
 
-- Perspectiva e visão do jogador;
-- Estilo e tipo de arte;
-- Gênero ou categoria do jogo;
-- Paleta de cores predominante;
-- Características visuais e mecânicas;
-- Outras propriedades relevantes para a identificação.
+- **Aplicação:** https://projeto-loki-site.onrender.com
+- **API:** https://projeto-loki.onrender.com
 
-## 2. Etapas de Desenvolvimento
+> A hospedagem utiliza o plano gratuito da Render. O backend pode levar alguns segundos para responder após um período de inatividade.
 
-O projeto será dividido inicialmente em três etapas principais:
+## ✨ Funcionalidades
 
-### 2.1. Coleta de Dados — Web Scraping
+- Identificação de jogos por características.
+- Catálogo de jogos cadastrados.
+- Consulta de informações e capas.
+- Navegação por páginas com Vue Router.
+- Comunicação entre frontend e backend por API REST.
 
-Utilização de Python para coleta automatizada de informações sobre jogos de SNES em fontes públicas e documentadas.
+## 🛠️ Tecnologias utilizadas
 
-Os dados coletados serão tratados, organizados e preparados para armazenamento.
+### Frontend
+- Vue.js
+- JavaScript
+- Vite
+- Vue Router
+- HTML e CSS
 
-### 2.2. Modelagem e Criação do Banco de Dados
+### Backend
+- Python
+- Flask
+- Flask-CORS
+- Gunicorn
 
-Desenvolvimento de um banco de dados relacional para armazenar as informações dos jogos e suas respectivas características.
+### Banco de dados
+- SQLite
 
-Essa estrutura permitirá realizar consultas, comparações e filtros durante o processo de identificação.
+### Hospedagem
+- Render (Static Site e Web Service)
+- Git e GitHub para versionamento.
 
-### 2.3. Sistema de Tomada de Decisões
+## 🧠 Como funciona a identificação?
 
-Desenvolvimento da lógica responsável por conduzir a identificação dos jogos.
+O usuário seleciona características disponíveis no sistema. O frontend envia essas escolhas para a API, que realiza consultas ao banco de dados.
 
-O sistema utilizará as respostas fornecidas pelo usuário para comparar características e reduzir progressivamente o conjunto de jogos candidatos.
+A lógica de filtragem funciona da seguinte maneira:
 
-A busca começará de maneira abrangente e se tornará cada vez mais específica conforme as respostas forem fornecidas.
+- **Dentro da mesma categoria:** as opções selecionadas são combinadas com OR.
+- **Entre categorias diferentes:** os filtros são combinados com AND.
+- **Categorias sem seleção:** não restringem os resultados.
 
-## 3. Lógica de Funcionamento
+Assim, o conjunto de jogos candidatos diminui conforme as características são selecionadas.
 
-A primeira versão da aplicação não utilizará Inteligência Artificial ou modelos de Machine Learning.
+A primeira versão utiliza regras de filtragem e consultas ao banco de dados, sem modelos de Inteligência Artificial ou Machine Learning.
 
-O mecanismo de identificação será baseado em:
+## 🗄️ Banco de dados
 
-- Comparação de características;
-- Consultas ao banco de dados;
-- Aplicação de filtros progressivos;
-- Eliminação de possibilidades incompatíveis com as respostas.
+O projeto utiliza SQLite e possui uma base com 272 jogos cadastrados.
 
-Dessa forma, o sistema buscará identificar o jogo mais compatível com as características informadas pelo usuário.
+Entre as entidades armazenadas estão:
 
-## 4. Perspectivas Futuras
+- Jogos;
+- Desenvolvedoras;
+- Tecnologias;
+- Regiões;
+- Personagens;
+- Compositores.
 
-A implementação de técnicas de Machine Learning está prevista como uma possibilidade de evolução do projeto.
+O relacionamento entre jogos e as demais entidades é organizado por tabelas intermediárias quando necessário.
 
-Entretanto, essas técnicas não farão parte da primeira versão.
+## 🔌 API
 
-A prioridade inicial será construir uma aplicação funcional, com uma base de dados consistente e uma lógica de identificação compreensível, permitindo futuras expansões e melhorias.
+Principais rotas disponíveis:
 
-## 5. Status do Projeto
+| Rota | Função |
+|---|---|
+| `/api/jogos` | Lista os jogos cadastrados |
+| `/api/buscar` | Busca jogos pelas características informadas |
+| `/api/opcoes` | Retorna opções de características |
+| `/api/estilos` | Retorna estilos disponíveis |
+| `/capas/<nome_arquivo>` | Disponibiliza capas dos jogos |
 
-<em>Em planejamento e desenvolvimento.</em>
+## 📁 Estrutura do projeto
 
-O desenvolvimento será realizado de maneira incremental, priorizando a construção e validação de cada etapa antes da integração com as demais.
+```text
+Projeto-Loki/
+├── dados/
+│   ├── capas/
+│   └── loki.db
+├── frontend/
+│   ├── src/
+│   │   ├── components/
+│   │   ├── views/
+│   │   └── ...
+│   └── package.json
+├── app.py
+├── requirements.txt
+├── .gitignore
+├── README.md
+└── documentacao/
+    └── GUIA_DE_ESTUDO.md
+```
+
+## 💻 Executando localmente
+
+### 1. Backend
+
+Na raiz do projeto, crie e ative um ambiente virtual:
+
+```bash
+python -m venv venv
+```
+
+Windows:
+
+```powershell
+.\venv\Scripts\Activate.ps1
+```
+
+Instale as dependências:
+
+```bash
+pip install -r requirements.txt
+```
+
+Inicie o backend:
+
+```bash
+python app.py
+```
+
+### 2. Frontend
+
+Em outro terminal:
+
+```bash
+cd frontend
+npm install
+npm run dev
+```
+
+Acesse o endereço local informado pelo Vite no terminal.
+
+## 🚀 Implantação
+
+A aplicação está hospedada na Render em dois serviços:
+
+- **Static Site:** frontend desenvolvido em Vue.js.
+- **Web Service:** backend desenvolvido em Flask.
+
+O frontend utiliza a variável de ambiente `VITE_API_URL` para localizar a API.
+
+O backend utiliza `FRONTEND_URL` para configurar a origem permitida pelo CORS.
+
+## 📚 Documentação
+
+Para conhecer melhor a arquitetura, a lógica de identificação, o banco de dados e as decisões de desenvolvimento, consulte:
+
+`documentacao/GUIA_DE_ESTUDO.md`
+
+## 🔮 Melhorias futuras
+
+- Ampliar os filtros de identificação.
+- Expandir e enriquecer a base de jogos.
+- Aprimorar a experiência de pesquisa.
+- Avaliar futuramente a utilização de técnicas de Machine Learning.
+
+---
+
+Desenvolvido como projeto acadêmico de Análise e Desenvolvimento de Sistemas.
